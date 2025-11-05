@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:telephony/telephony.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 import '../widgets/app_title.dart';
 import '../widgets/input_field.dart';
@@ -249,7 +249,7 @@ class _AuthScreenState extends State<AuthScreen> {
               const SizedBox(height: 40),
               // Description
               Text(
-                AppLocalizations.of(context)!.phoneNumber,
+                'Enter your phone number',
                 style: TextStyle(
                   fontSize: 16,
                   color: Colors.grey[700],

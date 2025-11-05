@@ -2,7 +2,7 @@ import 'package:chatz/screens/auth_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../widgets/onboarding_container.dart';
 import '../screens/language_scr.dart';
@@ -51,7 +51,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               onPressed: () {
                 _pageController.jumpToPage(pages.length - 1);
               },
-              child: Text(AppLocalizations.of(context)!.skip),
+              child: Text('skip'),
             ),
             Padding(
               padding: const EdgeInsets.all(20.0),
@@ -79,7 +79,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
                 setState(() {});
               },
-              child: Text(AppLocalizations.of(context)!.next),
+              child: Text('next'),
             )
           ], 
         ),

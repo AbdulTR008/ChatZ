@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../models/languages.dart';
 import '../riverpod/language_provider.dart';
 
@@ -85,7 +84,7 @@ class _LanguagesScreenState extends ConsumerState<LanguagesScreen> {
                   backgroundColor: Colors.blue,
                   foregroundColor: const Color(0xffffffff)),
               onPressed: onSubmit,
-              child: Text(AppLocalizations.of(context)!.submit)),
+              child: Text('submit')),
         )
       ],
     ));
