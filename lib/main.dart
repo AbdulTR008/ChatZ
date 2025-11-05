@@ -42,9 +42,23 @@ class MyApp extends ConsumerWidget {
       // ],
       locale: Locale(ref.watch(selectedLanguageProvider), ''),
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'ChatZ',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color(0xFF075E54), // WhatsApp dark teal
+          primary: const Color(0xFF075E54),
+          secondary: const Color(0xFF25D366), // WhatsApp green
+        ),
+        scaffoldBackgroundColor: const Color(0xFFECE5DD), // WhatsApp chat background
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color(0xFF075E54),
+          foregroundColor: Colors.white,
+          elevation: 0,
+        ),
+        floatingActionButtonTheme: const FloatingActionButtonThemeData(
+          backgroundColor: Color(0xFF25D366),
+          foregroundColor: Colors.white,
+        ),
         useMaterial3: true,
       ),
       home: const AuthScreen(),
