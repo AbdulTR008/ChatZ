@@ -1,4 +1,4 @@
-import 'package:chatz/screens/individual_chat_screen.dart';
+import 'package:chatall/screens/individual_chat_screen.dart';
 import 'package:flutter/material.dart';
 import '../widgets/chat_tile.dart';
 import '../controllers/phone_auth_services.dart';
@@ -54,7 +54,7 @@ class _ChatListScreenState extends State<ChatListScreen>
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'ChatZ',
+          'ChatAll',
           style: TextStyle(
             fontWeight: FontWeight.w600,
             fontSize: 22,
