@@ -1,4 +1,4 @@
-import 'package:chatz/screens/chat_list_screen.dart';
+import 'package:chatall/screens/chat_list_screen.dart';
 import 'package:flutter/material.dart';
 
 // This is kept for backward compatibility

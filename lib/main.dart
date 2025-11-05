@@ -1,6 +1,6 @@
-import 'package:chatz/screens/auth_screen.dart';
-import 'package:chatz/screens/chat_screen.dart';
-import 'package:chatz/screens/magic_screen.dart';
+import 'package:chatall/screens/auth_screen.dart';
+import 'package:chatall/screens/chat_screen.dart';
+import 'package:chatall/screens/magic_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -41,7 +41,7 @@ class MyApp extends ConsumerWidget {
       // ],
       locale: Locale(ref.watch(selectedLanguageProvider), ''),
       debugShowCheckedModeBanner: false,
-      title: 'ChatZ',
+      title: 'ChatAll',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
           seedColor: const Color(0xFF075E54), // WhatsApp dark teal

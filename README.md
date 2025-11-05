@@ -1,6 +1,6 @@
-# chatz
+# ChatAll
 
-A new Flutter project.
+ChatAll - Connect with everyone, everywhere. A modern messaging application built with Flutter.
 
 ## Getting Started
 
