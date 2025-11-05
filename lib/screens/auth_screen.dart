@@ -1,4 +1,4 @@
-import 'package:chatz/screens/chat_list_screen.dart';
+import 'package:chatall/screens/chat_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
@@ -239,7 +239,7 @@ class _AuthScreenState extends State<AuthScreen> {
               const SizedBox(height: 60),
               // WhatsApp-style title
               const Text(
-                'ChatZ',
+                'ChatAll',
                 style: TextStyle(
                   fontSize: 32,
                   fontWeight: FontWeight.bold,
@@ -260,7 +260,7 @@ class _AuthScreenState extends State<AuthScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Text(
-                  'ChatZ will send an SMS message to verify your phone number.',
+                  'ChatAll will send an SMS message to verify your phone number.',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 13,

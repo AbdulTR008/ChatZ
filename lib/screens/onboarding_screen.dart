@@ -1,4 +1,4 @@
-import 'package:chatz/screens/auth_screen.dart';
+import 'package:chatall/screens/auth_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -21,8 +21,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   List<Widget> pages = [
     const LanguagesScreen(),
     const OnBoardingContainer(
-      title: "Welcome to Chat Z!",
-      desc: "Get started and explore what [Your App Name] has to offer.",
+      title: "Welcome to ChatAll!",
+      desc: "Get started and explore what ChatAll has to offer.",
       image:
           'assets/images/hello.jpg', // Assuming "Hello.png" is the correct path
     ),
