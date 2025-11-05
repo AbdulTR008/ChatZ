@@ -1,4 +1,4 @@
-import 'package:chatz/screens/chat_screen.dart';
+import 'package:chatz/screens/chat_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
@@ -77,47 +77,84 @@ class _AuthScreenState extends State<AuthScreen> {
         showDialog(
           barrierDismissible: false,
           context: context,
-          builder: (context) => Expanded(
-            child: AlertDialog(
-              actions: [
-                ElevatedButton(
-                  onPressed: otpSubmit,
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor:
-                          Theme.of(context).colorScheme.primaryContainer),
-                  child: const Text('Submit'),
-                )
-              ],
-              title: const Text('Enter OTP'),
-              content: SingleChildScrollView(
-                child: Form(
-                  key: _formKey2,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      PinCodeTextField(
-                        onCompleted: (value) {
-                          otpSubmit();
-                        },
-                        pinTheme: PinTheme(
-                          shape: PinCodeFieldShape.box,
-                          borderRadius: BorderRadius.circular(5),
-                          fieldHeight: 50,
-                          fieldWidth: 30,
-                          activeFillColor: Colors.white,
-                          selectedFillColor: Colors.blue,
-                        ),
-                        appContext: context,
-                        length: 6,
-                        onChanged: (enteredInput) {},
-                        controller: _userOTP,
+          builder: (context) => AlertDialog(
+            backgroundColor: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            title: const Text(
+              'Enter OTP',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+                color: Color(0xFF075E54),
+              ),
+            ),
+            content: SingleChildScrollView(
+              child: Form(
+                key: _formKey2,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'We sent a code to your phone',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.grey,
                       ),
-                    ],
-                  ),
+                    ),
+                    const SizedBox(height: 24),
+                    PinCodeTextField(
+                      onCompleted: (value) {
+                        otpSubmit();
+                      },
+                      pinTheme: PinTheme(
+                        shape: PinCodeFieldShape.box,
+                        borderRadius: BorderRadius.circular(8),
+                        fieldHeight: 50,
+                        fieldWidth: 40,
+                        activeFillColor: Colors.white,
+                        selectedFillColor: const Color(0xFFE8F5E9),
+                        inactiveFillColor: Colors.grey[100]!,
+                        activeColor: const Color(0xFF25D366),
+                        selectedColor: const Color(0xFF25D366),
+                        inactiveColor: Colors.grey[300]!,
+                      ),
+                      enableActiveFill: true,
+                      appContext: context,
+                      length: 6,
+                      onChanged: (enteredInput) {},
+                      controller: _userOTP,
+                    ),
+                  ],
                 ),
               ),
             ),
+            actions: [
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: otpSubmit,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF25D366),
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                  ),
+                  child: const Text(
+                    'VERIFY',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         );
       },
@@ -135,7 +172,7 @@ class _AuthScreenState extends State<AuthScreen> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => const ChatScreen(),
+            builder: (context) => const ChatListScreen(),
           ),
         );
       }
@@ -193,113 +230,131 @@ class _AuthScreenState extends State<AuthScreen> {
     final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+$');
 
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
-      body: Column(
-        children: [
-          AppTitle(screenHeight: screenHeight),
-          Expanded(
-            flex: 3,
-            child: Container(
-              color: const Color(0xff9AD0C2),
-              width: double.infinity,
-              child: Center(
-                child: SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Card(
-                      color: Colors.white,
-                      child: Form(
-                        key: _formKey,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              InputField(
-                                validator: (value) {
-                                  if (value == null ||
-                                      value.trim().isEmpty ||
-                                      !emailRegex.hasMatch(value)) {
-                                    return 'Enter Valid UserEmail';
-                                  }
-                                  return null;
-                                },
-                                obscureText: false,
-                                keyBoardType: TextInputType.emailAddress,
-                                icon: Icons.mail,
-                                input: _userEmail,
-                                inputLabel: AppLocalizations.of(context)!.email,
-                              ),
-                              InputField(
-                                  prefixText: '+91 ',
-                                  keyBoardType: TextInputType.phone,
-                                  input: _userPhoneNumber,
-                                  inputLabel:
-                                      AppLocalizations.of(context)!.phoneNumber,
-                                  icon: Icons.phone,
-                                  obscureText: false,
-                                  validator: (value) {
-                                    if (value!.length > 10) {
-                                      return 'Enter Valid Number';
-                                    }
-                                    return null;
-                                  }),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.teal),
-                                  onPressed: () {
-                                    authPhoneSubmit();
-                                    authEmailSubmit();
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: isLoading
-                                        ? const CircularProgressIndicator(
-                                            backgroundColor: Colors.red,
-                                          )
-                                        : Text(
-                                            isUserHasAccount
-                                                ? AppLocalizations.of(context)!
-                                                    .login
-                                                : AppLocalizations.of(context)!
-                                                    .signUp,
-                                            style: const TextStyle(
-                                                fontSize: 25,
-                                                color: Colors.black),
-                                          ),
-                                  ),
-                                ),
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  setState(() {
-                                    isUserHasAccount = !isUserHasAccount;
-                                  });
-                                },
-                                child: Text(
-                                  isUserHasAccount
-                                      ? AppLocalizations.of(context)!
-                                          .createAccount
-                                      : AppLocalizations.of(context)!
-                                          .iAlreadyHaveAnAccount,
-                                  style: const TextStyle(
-                                      fontSize: 18, color: Colors.blue),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          child: Column(
+            children: [
+              const SizedBox(height: 60),
+              // WhatsApp-style title
+              const Text(
+                'ChatZ',
+                style: TextStyle(
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF075E54),
+                ),
+              ),
+              const SizedBox(height: 40),
+              // Description
+              Text(
+                AppLocalizations.of(context)!.phoneNumber,
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.grey[700],
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Text(
+                  'ChatZ will send an SMS message to verify your phone number.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 13,
+                    color: Colors.grey[600],
                   ),
                 ),
               ),
-            ),
-          )
-        ],
+              const SizedBox(height: 40),
+              // Phone number input
+              Form(
+                key: _formKey,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: const Color(0xFF25D366), width: 2),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Row(
+                    children: [
+                      const Text(
+                        '+91',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: TextFormField(
+                          controller: _userPhoneNumber,
+                          keyboardType: TextInputType.phone,
+                          style: const TextStyle(fontSize: 16),
+                          decoration: const InputDecoration(
+                            hintText: 'Phone number',
+                            border: InputBorder.none,
+                            isDense: true,
+                          ),
+                          validator: (value) {
+                            if (value == null || value.trim().isEmpty) {
+                              return 'Enter phone number';
+                            }
+                            if (value.length != 10) {
+                              return 'Enter valid 10-digit number';
+                            }
+                            return null;
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const Spacer(),
+              // Continue button
+              SizedBox(
+                width: double.infinity,
+                height: 48,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF25D366),
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    elevation: 0,
+                  ),
+                  onPressed: isLoading ? null : () {
+                    if (_formKey.currentState!.validate()) {
+                      authPhoneSubmit();
+                    }
+                  },
+                  child: isLoading
+                      ? const SizedBox(
+                          height: 20,
+                          width: 20,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2,
+                            valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                          ),
+                        )
+                      : const Text(
+                          'NEXT',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            letterSpacing: 0.5,
+                          ),
+                        ),
+                ),
+              ),
+              const SizedBox(height: 24),
+            ],
+          ),
+        ),
       ),
     );
   }
